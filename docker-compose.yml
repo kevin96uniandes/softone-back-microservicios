@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  elementos:
+    build: ./elementos/.
+    ports:
+      - "3002:3002"
+    environment:
+      DB_NAME: elementos_softone
+      DB_HOST: elementos_db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    depends_on:
+      elementos_db:
+        condition: service_healthy
+    networks:
+      - app_net
+      - elementos_net
+
+  elementos_db:
+    image: postgres
+    environment:
+      POSTGRES_DB: elementos_softone
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+    networks:
+      - elementos_net
+networks:
+  elementos_net:
+  app_net:
