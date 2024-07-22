@@ -1,0 +1,12 @@
+flask
+flask-cors
+flask-restful
+python-dotenv
+marshmallow
+marshmallow-sqlalchemy
+Flask-SQLAlchemy
+psycopg2-binary
+coverage==5.3
+faker
+requests
+flask-cors

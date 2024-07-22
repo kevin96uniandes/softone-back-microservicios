@@ -1,6 +1,23 @@
 version: "3.8"
 
 services:
+
+  api-gateway:
+    build: ./api_gateway/.
+    ports:
+      - "3000:3000"
+    environment:
+      DB_NAME: elementos_softone
+      DB_HOST: elementos_db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    depends_on:
+      elementos_db:
+        condition: service_healthy
+    networks:
+      - app_net
+
   elementos:
     build: ./elementos/.
     ports:
@@ -31,6 +48,38 @@ services:
       retries: 5
     networks:
       - elementos_net
+
+  clave_maestra:
+    build: ./clave_maestra/.
+    ports:
+      - "3003:3003"
+    environment:
+      DB_NAME: clave_maestra_softone
+      DB_HOST: clave_maestra_db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    depends_on:
+      clave_maestra_db:
+        condition: service_healthy
+    networks:
+      - app_net
+      - clave_maestra_net
+
+  clave_maestra_db:
+    image: postgres
+    environment:
+      POSTGRES_DB: clave_maestra_softone
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+    networks:
+      - clave_maestra_net
 networks:
   elementos_net:
+  clave_maestra_net:
   app_net:
