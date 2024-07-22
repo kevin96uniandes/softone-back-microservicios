@@ -16,6 +16,7 @@ services:
       elementos_db:
         condition: service_healthy
     networks:
+      - api_net
       - app_net
 
   elementos:
@@ -83,3 +84,4 @@ networks:
   elementos_net:
   clave_maestra_net:
   app_net:
+  api_net:

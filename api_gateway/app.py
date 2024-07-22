@@ -8,8 +8,8 @@ CORS(app)
 # Configura las URLs de tus microservicios
 
 SERVICES = {
-    'clave_maestra': 'http://localhost:3003/api/clave_maestra',
-    'elementos': 'http://localhost:3002/api/elementos'
+    'clave_maestra': 'http://clave_maestra:3003/api/clave_maestra',
+    'elementos': 'http://elementos:3002/api/elementos'
 }
 
 @app.route('/<service>/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE'])

@@ -8,11 +8,11 @@ actions_blueprint = Blueprint('operations', __name__)
 def healthcheck():
     return 'pong', 200
 
-@actions_blueprint.route('/', methods = ['GET'])
+@actions_blueprint.route('/listar', methods = ['GET'])
 def list_elementos():
     return jsonify(ElementoFacade.get_elementos()), 200
 
-@actions_blueprint.route('/', methods = ['POST'])
+@actions_blueprint.route('/crear', methods = ['POST'])
 def crear_elementos():
     return ElementoFacade.create_elemento(request.get_json()), 200
 
