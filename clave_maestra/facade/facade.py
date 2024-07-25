@@ -12,6 +12,8 @@ class ClaveMaestraFacade():
     def crear_clave_maestra(data):
         clave_maestra = ClaveMaestra(
             nombre=data.get('nombre'),
+            contrasena=data.get('contrasena'),
+            pista=data.get('pista'),
         )
         db.session.add(clave_maestra)
         db.session.commit()

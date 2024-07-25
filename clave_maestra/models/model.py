@@ -12,6 +12,8 @@ class ClaveMaestra(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String, unique=True)
+    contrasena = db.Column(db.String)
+    pista = db.Column(db.String)
     fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
 
 
