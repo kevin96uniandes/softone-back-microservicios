@@ -6,15 +6,6 @@ services:
     build: ./api_gateway/.
     ports:
       - "3000:3000"
-    environment:
-      DB_NAME: elementos_softone
-      DB_HOST: elementos_db
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-    depends_on:
-      elementos_db:
-        condition: service_healthy
     networks:
       - api_net
       - app_net
